@@ -16,10 +16,12 @@ const useFetch = (cb, options = {}) => {
       const supabaseAccessToken = await session.getToken({
         template: "supabase",
       });
+      console.debug("useFetch tokenPresent:", !!supabaseAccessToken);
       const response = await cb(supabaseAccessToken, options, ...args);
       setData(response);
       setError(null);
     } catch (error) {
+      console.error("useFetch error getting token or calling cb:", error);
       setError(error);
     } finally {
       setLoading(false);

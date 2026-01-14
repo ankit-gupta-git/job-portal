@@ -15,6 +15,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
+
 const JobCard = ({
   job,
   savedInit = false,
@@ -24,6 +25,11 @@ const JobCard = ({
   const [saved, setSaved] = useState(savedInit);
 
   const { user } = useUser();
+
+    // 👇 YAHAN
+  useEffect(() => {
+    console.log("JOB COMPANY DATA 👉", job.company);
+  }, [job.company]);
 
   const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
     job_id: job.id,
@@ -72,7 +78,17 @@ const JobCard = ({
       </CardHeader>
       <CardContent className="flex flex-col gap-4 flex-1">
         <div className="flex justify-between">
-          {job.company && <img src={job.company.logo_url} className="h-6" />}
+          {job.company && (
+            <img
+              src={job.company.logo_url || "/company-placeholder.png"}
+              alt={job.company.name || "Company"}
+              className="h-6 object-contain"
+              onError={(e) => {
+                e.currentTarget.src = "/company-placeholder.png";
+              }}
+            />
+          )}
+
           <div className="flex gap-2 items-center">
             <MapPinIcon size={15} /> {job.location}
           </div>
