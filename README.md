@@ -2,7 +2,7 @@
 
 A modern job portal built with React, Supabase, and Clerk, designed to connect recruiters with job seekers. This platform allows recruiters to post job openings while enabling job seekers to discover and apply for relevant positions.
 
-## 🚀 Features
+## Features
 
 - **User Authentication & Authorization**
   - Secure authentication using Clerk
@@ -25,7 +25,7 @@ A modern job portal built with React, Supabase, and Clerk, designed to connect r
   - Responsive design for all devices
   - Intuitive navigation and user flows
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: React 18, Vite, TypeScript
 - **UI Components**: shadcn/ui, Tailwind CSS
@@ -35,7 +35,7 @@ A modern job portal built with React, Supabase, and Clerk, designed to connect r
 - **Form Handling**: React Hook Form with Zod validation
 - **Deployment**: Vercel/Netlify ready
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -77,7 +77,7 @@ A modern job portal built with React, Supabase, and Clerk, designed to connect r
    pnpm dev
    ```
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 job-portal/
@@ -94,7 +94,7 @@ job-portal/
 └── ...
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -104,11 +104,11 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Vite](https://vitejs.dev/) for the amazing build tooling
 - [Supabase](https://supabase.com/) for the backend services
