@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Search, ArrowRight, Briefcase, Building2, Users, Clock, DollarSign, MapPin, ChevronRight, Sparkles, ChevronDown, HelpCircle, Copy, MessageCircle, MessageSquare, BookOpen } from 'lucide-react';
 import companies from "../data/companies.json";
 import faqs from "../data/faq.json";
+import { useUser } from '@clerk/clerk-react';
 
 
 const fadeInUp = {
@@ -30,6 +31,7 @@ const LandingPage = () => {
   const [isMounted, setIsMounted] = useState(false);
   const heroRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const { user } = useUser();
 
   useEffect(() => {
     setIsMounted(true);

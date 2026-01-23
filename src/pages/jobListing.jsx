@@ -27,20 +27,30 @@ const JobListing = () => {
   const { isLoaded } = useUser();
 
   const {
-    // loading: loadingCompanies,
-    data: companies,
+    loading: loadingCompanies,
+    data: companiesData,
+    error: companiesError,
     fn: fnCompanies,
   } = useFetch(getCompanies);
 
+  const companies = companiesData?.data || [];
+
   const {
     loading: loadingJobs,
-    data: jobs,
+    data: jobs = [], // Default to empty array
+    error: jobsError,
     fn: fnJobs,
   } = useFetch(getJobs, {
     location,
     company_id,
     searchQuery,
   });
+
+  const filteredJobs = (jobs || []).filter(
+    (job) =>
+      job?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job?.description?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     if (isLoaded) {
@@ -70,6 +80,40 @@ const JobListing = () => {
 
   if (!isLoaded) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
+
+  if (companiesError || jobsError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-red-500 mb-2">
+            {companiesError?.message || jobsError?.message || 'An error occurred'}
+          </h2>
+          <Button
+            variant="outline"
+            onClick={() => {
+              if (companiesError) fnCompanies();
+              if (jobsError) fnJobs();
+            }}
+            className="mt-4"
+          >
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (jobs?.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-red-500 mb-2">
+            No Jobs Found
+          </h2>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -111,21 +155,20 @@ const JobListing = () => {
         </Select>
 
         <Select
-          value={company_id}
-          onValueChange={(value) => setCompany_id(value)}
+          onValueChange={(value) => setCompany_id(value === "all" ? "" : value)}
+          value={company_id || "all"}
         >
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Company" />
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="All Companies" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {companies?.map(({ name, id }) => {
-                return (
-                  <SelectItem key={name} value={id}>
-                    {name}
-                  </SelectItem>
-                );
-              })}
+              <SelectItem value="all">All Companies</SelectItem>
+              {(companies || []).map((company) => (
+                <SelectItem key={company.id} value={company.id}>
+                  {company.name}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -144,18 +187,18 @@ const JobListing = () => {
 
       {loadingJobs === false && (
         <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {jobs?.length ? (
-            jobs.map((job) => {
-              return (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  savedInit={job?.saved?.length > 0}
-                />
-              );
-            })
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map((job) => (
+              <JobCard
+                key={job.id}
+                job={job}
+                savedInit={job?.saved?.length > 0}
+              />
+            ))
           ) : (
-            <div>No Jobs Found 😢</div>
+            <div className="col-span-full text-center">
+              No Jobs Found 😢
+            </div>
           )}
         </div>
       )}

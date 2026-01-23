@@ -12,6 +12,8 @@ import MyJobs from "./pages/my-jobs";
 import SavedJobs from "./pages/saved-jobs";
 import JobPage from "./pages/job";
 import AboutPage from "./pages/about";
+import SignUpPage from "./pages/sign-up";
+import CompaniesPage from "./pages/companies";
 
 import "./App.css";
 
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutPage />,
+      },
+      {
+        path: "/companies",
+        element: <CompaniesPage />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUpPage />,
       },
       {
         path: "/onboarding",

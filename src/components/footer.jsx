@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import {
-  BriefcaseBusiness,
   Mail,
   Phone,
   MapPin,
@@ -48,10 +47,10 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { name: 'Twitter', icon: Twitter, href: '#', color: 'hover:text-blue-400' },
-    { name: 'GitHub', icon: Github, href: '#', color: 'hover:text-gray-300' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#', color: 'hover:text-blue-500' },
-    { name: 'YouTube', icon: Youtube, href: '#', color: 'hover:text-red-500' },
+    { name: 'Twitter', icon: Twitter, href: 'https://x.com/ankitgupta_79', color: 'hover:text-blue-400' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/ankit-gupta-git/ai-job-portal', color: 'hover:text-gray-300' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/iamankit-gupta', color: 'hover:text-blue-500' },
+    { name: 'Portfolio', icon: Youtube, href: 'https://portfolio-v1-eta-rosy.vercel.app/', color: 'hover:text-red-500' },
   ];
 
   const scrollToTop = () => {
@@ -79,13 +78,8 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg">
-                  <BriefcaseBusiness className="h-6 w-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
-                  Hirrd
-                </span>
+              <div className="flex items-center">
+                <img src="/logo.png" alt="logo" className="h-10 w-16" />
               </div>
 
               <p className="text-gray-300 leading-relaxed max-w-md">

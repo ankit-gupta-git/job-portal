@@ -15,8 +15,15 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [_, setSearch] = useSearchParams();
+  const [search, setSearch] = useSearchParams();
   const { user } = useUser();
+
+  useEffect(() => {
+    if (search.get("sign-in") === "true") {
+      setShowSignIn(true);
+      setSearch({});
+    }
+  }, [search, setSearch]);
 
   useEffect(() => {
     document.body.style.overflow = showSignIn ? "hidden" : "unset";

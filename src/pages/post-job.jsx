@@ -67,9 +67,11 @@ const PostJob = () => {
 
   const {
     loading: loadingCompanies,
-    data: companies,
+    data: companiesData,
     fn: fnCompanies,
   } = useFetch(getCompanies);
+
+  const companies = companiesData?.data || [];
 
   useEffect(() => {
     if (isLoaded) {
